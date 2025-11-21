@@ -44,6 +44,8 @@ input[type="number"] {
     display: flex;
     align-items: center;
     padding: 0 24px;
+    position: relative;
+    z-index: 50;
 }
 
 .top-header-content {
@@ -170,6 +172,8 @@ input[type="number"] {
     display: flex;
     flex-direction: column;
     padding: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* Sidebar Top Container - Contains Venue Selector and Search */
@@ -178,6 +182,7 @@ input[type="number"] {
     flex-direction: column;
     gap: 8px;
     padding: 8px;
+    flex-shrink: 0;
 }
 
 /* Venue Selector */
@@ -466,6 +471,9 @@ input[type="number"] {
 .sidebar-nav {
     flex: 1;
     padding: 0 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
 }
 
 .nav-item {
@@ -931,6 +939,7 @@ input[type="number"] {
 .sidebar-footer {
     padding: 8px;
     border-top: 1px solid var(--border);
+    flex-shrink: 0;
 }
 
 .help-button {
@@ -964,6 +973,7 @@ input[type="number"] {
     background-color: var(--surface);
     max-width: 100%;
     overflow: hidden;
+    min-height: 0;
 }
 
 /* Page Header */
@@ -1014,7 +1024,13 @@ input[type="number"] {
     position: relative;
 }
 
-.page-header-overflow-button {
+.import-export-dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 10000;
+}
+
+.import-export-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1026,18 +1042,163 @@ input[type="number"] {
     color: var(--text);
     cursor: pointer;
     transition: all 0.2s ease;
+    position: relative;
 }
 
-.page-header-overflow-button:hover {
+.import-export-button:hover {
     background: var(--surface-hover);
     border-color: var(--border-active);
+}
+
+.import-export-button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Tooltip - positioned relative to dropdown wrapper to escape stacking context */
+.import-export-dropdown::after {
+    content: 'Import/Export';
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--grey-grey-900);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 99999;
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.import-export-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--grey-grey-900);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 99999;
+}
+
+.import-export-dropdown:hover::after,
+.import-export-dropdown:hover::before {
+    opacity: 1;
+}
+
+.import-export-options {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 10000;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 160px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.import-export-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+}
+
+.import-export-option:hover {
+    background-color: var(--surface-hover);
+}
+
+.live-pages-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.live-pages-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'IBM Plex Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.live-pages-button:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-active);
+}
+
+.live-pages-button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.live-pages-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 10000;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 280px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.live-pages-label {
+    padding: 4px 4px 2px 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-subtle);
+    line-height: 18px;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /* Main Content */
 .main-content {
     flex: 1;
+    min-height: 0;
     background-color: var(--surface-low);
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     max-width: 100%;
 }
@@ -2871,7 +3032,7 @@ input:focus-visible,
     z-index: 10000;
     background: var(--surface-raised);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-width: 280px;
     padding: 4px;
@@ -2880,8 +3041,10 @@ input:focus-visible,
 .dropdown-option {
     width: 100%;
     display: flex;
-    align-items: flex-start;
-    padding: 12px;
+    align-items: center;
+    gap: 12px;
+    height: 48px;
+    padding: 8px;
     background: none;
     border: none;
     border-radius: 4px;
@@ -2891,28 +3054,49 @@ input:focus-visible,
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.dropdown-option:hover {
+.dropdown-option:hover,
+.dropdown-option.active {
     background-color: var(--surface-hover);
+}
+
+.dropdown-option-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-primary);
+}
+
+.dropdown-option-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .dropdown-option-content {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0px;
+    flex: 1;
+    min-width: 0;
 }
 
 .dropdown-option-title {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
-    line-height: 1.2;
+    line-height: 20px;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .dropdown-option-description {
     font-size: 12px;
     font-weight: 400;
     color: var(--text-subtle);
-    line-height: 1.3;
+    line-height: 18px;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .dropdown-divider {

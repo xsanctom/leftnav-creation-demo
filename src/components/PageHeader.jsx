@@ -1,104 +1,79 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useMenu } from '../context/MenuContext';
+import React from 'react';
+import { useNavigation } from '../context/NavigationContext';
 
-function PageHeader({ activeTab, setActiveTab, onOpenAddItemsModal, onOpenMenuItemModal }) {
-  const [newMenuOpen, setNewMenuOpen] = useState(false);
-  const newMenuDropdownRef = useRef(null);
+function PageHeader() {
+  const { navigationData, setNavigationData } = useNavigation();
 
-  // Handle outside click for new menu dropdown
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (newMenuDropdownRef.current && !newMenuDropdownRef.current.contains(event.target)) {
-        setNewMenuOpen(false);
+  const handleExport = () => {
+    const dataStr = JSON.stringify(navigationData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'navigation-structure.json';
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const imported = JSON.parse(event.target.result);
+            if (window.confirm('Import this navigation structure? This will replace your current structure. Note: Changes are temporary and will reset on refresh.')) {
+              setNavigationData(imported);
+            }
+          } catch (error) {
+            alert('Error importing file. Please check the file format.');
+          }
+        };
+        reader.readAsText(file);
       }
     };
-
-    if (newMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [newMenuOpen]);
+    input.click();
+  };
 
   return (
     <div className="page-header">
       <div className="page-header-content">
         <div className="page-title-section">
-          <h1 className="page-title">Menu</h1>
-          
-          {/* Tabs */}
-          <div className="page-tabs">
-            <button
-              className={`tab-button ${activeTab === 'online' ? 'active' : ''}`}
-              onClick={() => setActiveTab('online')}
-            >
-              Online
-            </button>
-            <button
-              className={`tab-button ${activeTab === 'internal' ? 'active' : ''}`}
-              onClick={() => setActiveTab('internal')}
-            >
-              Internal
-            </button>
-            <button
-              className={`tab-button ${activeTab === 'quantity' ? 'active' : ''}`}
-              onClick={() => setActiveTab('quantity')}
-            >
-              Quantity
-            </button>
-          </div>
+          <h1 className="page-title">Navigation Structure</h1>
         </div>
-
-        {/* Actions */}
         <div className="page-actions">
-          <button className="page-header-overflow-button" aria-label="More">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="5" cy="12" r="1"></circle>
-              <circle cx="12" cy="12" r="1"></circle>
-              <circle cx="19" cy="12" r="1"></circle>
-            </svg>
+          <button
+            onClick={handleExport}
+            style={{
+              padding: '8px 16px',
+              fontSize: '14px',
+              backgroundColor: 'var(--surface-hover)',
+              color: 'var(--text)',
+              border: '1px solid var(--border)',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Export JSON
           </button>
-          {/* New Menu Dropdown */}
-          <div className="new-menu-dropdown" ref={newMenuDropdownRef}>
-            <button
-              className="button primary"
-              onClick={() => setNewMenuOpen(!newMenuOpen)}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-              </svg>
-              New
-            </button>
-
-            {newMenuOpen && (
-              <div className="new-menu-options">
-                <button className="dropdown-option" onClick={() => {
-                  setNewMenuOpen(false);
-                  onOpenMenuItemModal();
-                }}>
-                  <div className="dropdown-option-content">
-                    <div className="dropdown-option-title">Single Menu Item</div>
-                    <div className="dropdown-option-description">Create one menu item at a time</div>
-                  </div>
-                </button>
-                
-                <div className="dropdown-divider"></div>
-                
-                <button className="dropdown-option" onClick={() => {
-                  setNewMenuOpen(false);
-                  onOpenAddItemsModal();
-                }}>
-                  <div className="dropdown-option-content">
-                    <div className="dropdown-option-title">Multiple Menu Items</div>
-                    <div className="dropdown-option-description">Easily create up to 60 menu items at once</div>
-                  </div>
-                </button>
-              </div>
-            )}
-          </div>
+          <button
+            onClick={handleImport}
+            style={{
+              padding: '8px 16px',
+              fontSize: '14px',
+              backgroundColor: 'var(--surface-hover)',
+              color: 'var(--text)',
+              border: '1px solid var(--border)',
+              borderRadius: '4px',
+              cursor: 'pointer'
+            }}
+          >
+            Import JSON
+          </button>
         </div>
       </div>
     </div>
@@ -106,4 +81,3 @@ function PageHeader({ activeTab, setActiveTab, onOpenAddItemsModal, onOpenMenuIt
 }
 
 export default PageHeader;
-

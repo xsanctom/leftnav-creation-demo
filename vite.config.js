@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/menu-test2/', // Required for GitHub Pages deployment
+  base: '/leftnav-creation-demo/', // Required for GitHub Pages deployment
   server: {
     port: 3002,
   },
