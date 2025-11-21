@@ -2,12 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+<link rel="icon" type="image/svg+xml" href="./vite.svg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <title>Menu Management</title>
+<script>
+  // Single Page Apps for GitHub Pages
+  // Redirect from query string to hash for SPA routing
+  (function() {
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    var redirect = l.search.slice(1).toLowerCase();
+    if (redirect && l.hash == '' && l.search.indexOf('&') === -1) {
+      l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/#' +
+        redirect.replace(/~and~/g, '&'));
+    }
+  })();
+</script>
   <script type="module" crossorigin src="/leftnav-creation-demo/assets/index-B80m62mQ.js"></script>
   <link rel="stylesheet" crossorigin href="/leftnav-creation-demo/assets/index-DU4Qpjvb.css">
 </head>
