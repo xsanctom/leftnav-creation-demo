@@ -1,0 +1,40 @@
+# Design System Rules
+
+## Color Usage
+CRITICAL: Always use CSS custom properties (var()) for colors. Never use hardcoded hex values.
+
+### Semantic Color Tokens
+Use theme tokens (--text, --surface, --border, etc.) instead of primitive colors:
+- Text: var(--text), var(--text-subtle), var(--text-active), var(--text-placeholder), var(--text-disabled)
+- Surfaces: var(--surface), var(--surface-hover), var(--surface-active), var(--surface-raised), var(--surface-low)
+- Borders: var(--border), var(--border-active), var(--border-transparent)
+- Interactive: var(--link), var(--link-hover), var(--focus)
+
+### Status Colors
+- Success: var(--success-text), var(--success-surface), var(--success-border)
+- Info: var(--info-text), var(--info-surface), var(--info-border)
+- Danger: var(--danger-text), var(--danger-surface), var(--danger-border)
+- Warning: var(--warning-text), var(--warning-surface), var(--warning-border)
+
+### Brand Colors
+- Primary: var(--brand-primary), var(--brand-primary-hover), var(--brand-primary-text)
+- Secondary: var(--brand-secondary), var(--brand-secondary-hover), var(--brand-secondary-text)
+
+## Border Radius
+- Default: 4px
+- Large elements (dialogs, modals): 8px
+- Use border-radius property directly with px values
+
+## Best Practices
+- Never use hardcoded color values - always use CSS custom properties
+- Theme tokens automatically handle light/dark mode switching
+- Use semantic tokens (--text, --surface) over primitives (--grey-grey-900)
+- Hover states should use corresponding -hover tokens
+- Active/selected states should use -active tokens
+- Disabled states should use -disabled tokens
+
+## Component Patterns
+- Buttons: Use var(--brand-primary) background with var(--brand-primary-text) for primary actions
+- Cards: Use var(--surface-raised) with var(--border) and border-radius: 4px
+- Forms: Use var(--field) for input backgrounds, var(--text-placeholder) for placeholders
+- Alerts: Match background/text/border using corresponding status tokens (success, info, danger, warning)

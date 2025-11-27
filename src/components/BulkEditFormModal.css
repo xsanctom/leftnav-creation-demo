@@ -1,0 +1,405 @@
+/* Bulk Edit Form Modal */
+.bulk-edit-form-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2001;
+  padding: 24px;
+}
+
+.bulk-edit-form-modal-container {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: modalSlideIn 0.3s ease-out;
+  overflow: visible;
+}
+
+.bulk-edit-form-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.bulk-edit-form-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bulk-edit-form-modal-close {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.bulk-edit-form-modal-close:hover {
+  color: var(--text);
+}
+
+.bulk-edit-form-modal-back {
+  background: none;
+  border: none;
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.bulk-edit-form-modal-back:hover {
+  color: var(--text);
+}
+
+.bulk-edit-form-modal-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+}
+
+.bulk-edit-form-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+.bulk-edit-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Reuse form styles from EditMenuItemModal */
+.bulk-edit-form-content .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bulk-edit-form-content .form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+}
+
+.bulk-edit-form-content .form-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 0;
+}
+
+.bulk-edit-form-content .form-help-text {
+  font-size: 14px;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.bulk-edit-form-content .edit-sublabel {
+  font-size: 14px;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.bulk-edit-form-content .edit-field-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.bulk-edit-form-content .edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Config Section (for Booking Windows) */
+.bulk-edit-form-content .config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.bulk-edit-form-content .config-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Availability Container */
+.bulk-edit-form-content .availability-container {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.bulk-edit-form-content .form-divider {
+  height: 1px;
+  background-color: var(--border);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Radio Options for Booking Windows */
+.bulk-edit-form-content .radio-options {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.bulk-edit-form-content .radio-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.bulk-edit-form-content .radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.bulk-edit-form-content .radio-option:hover {
+  background-color: var(--surface-raised);
+}
+
+.bulk-edit-form-content .radio-option.active {
+  background-color: var(--purple-surface);
+  border-color: var(--purple-border);
+}
+
+.bulk-edit-form-content .radio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.bulk-edit-form-content .radio-label {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.bulk-edit-form-content .radio-description {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  line-height: 1.4;
+}
+
+.bulk-edit-form-content .input-label {
+  font-size: 14px;
+  color: var(--text-subtle);
+}
+
+.bulk-edit-form-content .meal-period-container {
+  padding: 16px;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bulk-edit-form-content .edit-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bulk-edit-form-content .meal-period-label {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.bulk-edit-form-content .meal-period-description {
+  margin: 0;
+}
+
+.bulk-edit-form-content .flush-row {
+  margin-bottom: 0;
+}
+
+.bulk-edit-form-content .booking-rules-row {
+  margin-bottom: 0;
+}
+
+.bulk-edit-form-content .edit-sublabel {
+  font-size: 14px;
+  color: var(--text-subtle);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.bulk-edit-form-content .edit-inline-button {
+  align-self: flex-start;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bulk-edit-form-content .edit-inline-button:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-active);
+}
+
+.bulk-edit-form-content .booking-rules-delete-btn {
+  background: var(--danger-surface);
+  border: 1px solid var(--danger-border);
+  color: var(--text-subtle);
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  height: 40px;
+  width: 40px;
+}
+
+.bulk-edit-form-content .booking-rules-delete-btn:hover {
+  background: var(--danger-surface);
+  color: var(--text-subtle);
+  border-color: var(--danger-border);
+}
+
+.bulk-edit-form-content .booking-rules-delete-btn svg {
+  color: var(--text-subtle);
+}
+
+.bulk-edit-form-content .edit-input,
+.bulk-edit-form-content .edit-textarea,
+.bulk-edit-form-content .edit-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--field);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.bulk-edit-form-content .edit-textarea {
+  resize: vertical;
+  line-height: 1.5;
+  min-height: 100px;
+  height: auto;
+  padding: 12px;
+}
+
+.bulk-edit-form-content .edit-input:focus,
+.bulk-edit-form-content .edit-textarea:focus,
+.bulk-edit-form-content .edit-select:focus {
+  outline: none;
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 2px var(--focus);
+}
+
+/* Ensure MultiSelectDropdown can overflow modal */
+.bulk-edit-form-content .multi-select-container {
+  position: relative;
+  z-index: 100;
+}
+
+.bulk-edit-form-content .multi-select-dropdown {
+  z-index: 2002;
+}
+
+.bulk-edit-form-content .edit-toggle-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bulk-edit-form-content .edit-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  min-width: 48px;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bulk-edit-form-content .edit-toggle-button:hover {
+  background-color: var(--surface-hover);
+}
+
+.bulk-edit-form-content .edit-toggle-button.active {
+  background-color: var(--purple-surface);
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

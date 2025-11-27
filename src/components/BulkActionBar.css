@@ -1,0 +1,88 @@
+/* Bulk Action Bar */
+.bulk-action-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.bulk-action-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: var(--grey-grey-900);
+  border: 1px solid var(--grey-grey-850);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.bulk-action-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey-white);
+  white-space: nowrap;
+}
+
+.bulk-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Dark theme buttons for bulk action bar */
+.bulk-action-content .button.secondary {
+  background: var(--grey-grey-800);
+  color: var(--grey-white);
+  border: 1px solid var(--grey-grey-850);
+}
+
+.bulk-action-content .button.secondary:hover {
+  background: var(--grey-grey-750);
+  border-color: var(--grey-grey-800);
+}
+
+.bulk-action-content .button.secondary svg {
+  color: var(--grey-white);
+}
+
+.bulk-action-content .button.tertiary {
+  background: transparent;
+  color: var(--grey-white);
+  border: 1px solid var(--grey-grey-850);
+}
+
+.bulk-action-content .button.tertiary:hover {
+  background: var(--grey-grey-800);
+  border-color: var(--grey-grey-800);
+}
+
+/* Danger-styled delete button */
+.bulk-action-content .bulk-delete-button {
+  background: var(--danger-surface);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
+}
+
+.bulk-action-content .bulk-delete-button:hover {
+  background: var(--danger-surface);
+  border-color: var(--danger-border);
+}
+
+.bulk-action-content .bulk-delete-button svg {
+  color: var(--danger-text);
+}
+
