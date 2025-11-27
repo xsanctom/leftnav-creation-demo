@@ -105,7 +105,7 @@ const getInitialData = () => {
             id: 'group-engagement',
             type: 'group',
             label: createMultilingualLabel('Engagement', 'エンゲージメント'),
-            icon: 'email.svg',
+            icon: 'user--favorite--alt.svg',
             expanded: false,
             children: [
               {
@@ -560,8 +560,8 @@ export const NavigationProvider = ({ children }) => {
 
   // Add section
   const addSection = (name = 'New Section', language = 'en') => {
-    if (navigationData.sections.length >= 3) {
-      alert('Maximum of 3 sections allowed');
+    if (navigationData.sections.length >= 6) {
+      alert('Maximum of 6 sections allowed');
       return;
     }
     const newSection = {
